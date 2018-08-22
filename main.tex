@@ -1,0 +1,97 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc}
+
+\usepackage{textcomp}           % Extra Symbole (Grad Celsius etc.)
+\usepackage{amssymb,amsmath}    % Schöne Formeln (AMS = American Mathematical Society)
+\usepackage{graphicx}           % Bilder und Seitenränder
+\usepackage{subcaption}			% captions for subfigures
+\usepackage{booktabs}           % Schönere Tabellen
+\usepackage{colortbl}           % Farbige Tabellen
+
+%\usepackage{tcolorbox}			% schöne bunte Boxen
+\usepackage{mathtools}			% \mathclap für ordentliche \underbrace-			environments
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}			% Pagelayout mit \newgeometry, \restoregeometry
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{braket}
+\usepackage{caption}
+\usepackage{verbatim}
+\usepackage[per-mode=reciprocal,output-decimal-marker={.},binary-units=true,separate-uncertainty=true]{siunitx}
+\usepackage[breaklinks=true,colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
+\usepackage{physics}
+\usepackage{url}
+\usepackage{subcaption}
+\usepackage{calrsfs}
+\usepackage{tikz}
+\usetikzlibrary{decorations, positioning, intersections, calc, shapes,arrows, scopes}
+\DeclareMathAlphabet{\pazocal}{OMS}{zplm}{m}{n}
+
+\graphicspath{{./img/}}
+
+\newcommand{\dif}{\mathrm{d}}
+
+\bibliographystyle{instant}
+
+\renewcommand{\k}{\mathbf{k}}
+\begin{document}
+\begin{titlepage}
+ \begin{center}
+ \Large{Lab Course in Experimental Physics: Optics}
+ \end{center}
+ \begin{center}
+  \LARGE{\textbf{Focus locking of a tunable lens for optical transportation of ultracold atoms}}
+ \end{center}
+ \begin{center}
+ \large Marco \textsc{Canteri} \\
+ marco.canteri@student.uibk.ac.at\\
+ \end{center}
+
+ \begin{center}
+ \vspace{1cm}
+ Innsbruck, \today
+ \vspace{1cm}
+ \end{center}
+
+ \begin{abstract}
+In this project a setup for optical transportation of ultracold atoms has been realized. The focus of a laser was shifted by a tunable optotune lens, controlled by custom electronics and a feedback signal generated from a quadrant photodiode.
+\end{abstract}
+  \vspace{1cm}
+
+ \begin{center}
+ \includegraphics[scale=0.567]{img/uibk}
+ \end{center}
+
+\end{titlepage}
+
+\section{Introduction}
+
+
+\section{Conclusion}
+
+% \begin{thebibliography}{99}
+% \bibitem{datasheet_pfeiffer}
+% \textsc{Pfeiffer Vakuum}, \textit{Compact FullRange Gauge -PKR 251 }, \url{http://www.idealvac.com/files/brochures/Pfeiffer_PKR_251_Pirani_ColdCathode.pdf}
+%
+% \bibitem{demtroeder}
+% \textsc{W. Demtröder, H.-J. Foth}, \textit{Molekülspektren in kalten Düsenstrahlen}, \url{https://onlinelibrary.wiley.com/doi/pdf/10.1002/phbl.19870430104}
+%
+% \bibitem{bergmann}
+% \textsc{Bergmann-Schäfer}, \textit{Gase, Nanosysteme, Flüssigkeiten}, \textit{Band 5} (de Gruyter, 2005)
+%
+% \bibitem{cold_cathode}
+% \textsc{LDS Vacuum Shopper}, \textit{Cold Cathode Gauges}, \url{http://www.ldsvacuumshopper.com/cocaga.html}
+%
+% \bibitem{script}
+% \textsc{Jennifer Meyer, Roland Wester}, \textit{Versuch im Fortgeschrittenen Praktikum FP3: Supersonische Düsenstrahlen}
+%
+% \bibitem{lifetime}
+% \textsc{Cullen P.J., Milosavljevic V.} (2015) Prog. Theor. Exp. Phys.2015/6, 063J01 . doi:10.1093/ptep/ptv070
+%
+% \bibitem{illinois}
+% \textsc{McCall research group}, \textit{Supersonic Expansion Discharge Source}, \url{http://bjm.scs.illinois.edu/past/source.php}
+% \end{thebibliography}
+\end{document}
