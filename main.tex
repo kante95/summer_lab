@@ -69,12 +69,26 @@ In this project a setup for optical transportation of ultracold atoms has been r
 
 \section{Introduction}
 
+\section{Theoretical background}
+\subsection{Focus tunable lens}
+\subsection{Cylindrical lens}
+
+\section{Experiment setup}
+The setup prepared can be divided in two parts, the optical setup and the electronics part used to control the optics. The main idea of the experiment is to control and lock the focus of a 1064nm laser. This is done with an optotune EL-16-40-TC focus tunable lens \cite{lens_datasheet}. To lock the focus, a part of the beam has been send through a cylindrical lens, and then measured with a quadrant photodiode. The cylindrical lens deforms the spherical symmetry of the beam such that when projected on the photodiode, the light will not hit all the four quadrants uniformly. The signal generated from the quadrants can be used as a measure of relative focus, therefore we can feedback this signal to the lens and get focus locking.
+\subsection{Optical setup}
+\begin{figure}
+\centering
+\includegraphics[width = .5\textwidth]{opticsetup}
+\caption{Optical setup, after the fiber a 1064nm laser light is collimated and sent trough a tunable lens. Two cylindrical lens and a quadrant photodiode are used to generate an error signal for the focus which is feedback to the lens with some electronics. The focus of the laser could be changed from point A to point B, roughly 80 cm.}
+\end{figure}
+The setup is depicted in figure
+\subsection{Electronic PID}
 
 \section{Conclusion}
 
-% \begin{thebibliography}{99}
-% \bibitem{datasheet_pfeiffer}
-% \textsc{Pfeiffer Vakuum}, \textit{Compact FullRange Gauge -PKR 251 }, \url{http://www.idealvac.com/files/brochures/Pfeiffer_PKR_251_Pirani_ColdCathode.pdf}
+ \begin{thebibliography}{99}
+\bibitem{lens_datasheet}
+ \textsc{Optotune}, \textit{EL-16-40-TC}, \url{https://www.optotune.com/images/products/Optotune%20EL-16-40-TC.pdf}
 %
 % \bibitem{demtroeder}
 % \textsc{W. Demtröder, H.-J. Foth}, \textit{Molekülspektren in kalten Düsenstrahlen}, \url{https://onlinelibrary.wiley.com/doi/pdf/10.1002/phbl.19870430104}
@@ -93,5 +107,5 @@ In this project a setup for optical transportation of ultracold atoms has been r
 %
 % \bibitem{illinois}
 % \textsc{McCall research group}, \textit{Supersonic Expansion Discharge Source}, \url{http://bjm.scs.illinois.edu/past/source.php}
-% \end{thebibliography}
+ \end{thebibliography}
 \end{document}
