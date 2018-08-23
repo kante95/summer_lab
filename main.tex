@@ -57,7 +57,7 @@
  \end{center}
 
  \begin{abstract}
-In this project a setup for optical transportation of ultracold atoms has been realized. The focus of a laser was shifted by a tunable optotune lens, controlled by custom electronics and a feedback signal generated from a quadrant photodiode.
+In this project a setup for optical transportation of ultracold atoms has been realized. The focus of a laser was shifted with a tunable optotune lens controlled by custom electronics, and locked with a feedback signal generated from a quadrant photodiode.
 \end{abstract}
   \vspace{1cm}
 
@@ -79,9 +79,11 @@ The setup prepared can be divided in two parts, the optical setup and the electr
 \begin{figure}
 \centering
 \includegraphics[width = .5\textwidth]{opticsetup}
-\caption{Optical setup, after the fiber a 1064nm laser light is collimated and sent trough a tunable lens. Two cylindrical lens and a quadrant photodiode are used to generate an error signal for the focus which is feedback to the lens with some electronics. The focus of the laser could be changed from point A to point B, roughly 80 cm.}
+\caption{Optical setup, after the fiber a 1064nm laser light is collimated and sent trough a tunable lens. Two cylindrical lens and a quadrant photodiode are used to generate an error signal for the focus which is feedback to the lens with some electronics. The focus of the laser could be changed from point A to point B, roughly 80 cm.} \label{img:opticsetup}
 \end{figure}
-The setup is depicted in figure
+The setup is depicted in figure \ref{img:opticsetup}. We used a 1064nm laser, the light is split with a beam splitter, one beam is used in another experiment, while the beam showed in the setup is coupled with a fiber in order to filter the modes and have at the end a pure Gaussian beam. After the fiber the beam is expanded with two lenses to roughly 10 mm diameter. Subsequently, the beam pass through a tunable lens controlled by the electronic part. The lens can change focus from  -500 to +333 mm, but in this experiment we kept the focus negative. A beam splitter is used to create a beam for measuring the focus shift, while the transmitted beam is focused with a 400mm lens between point A and B depending on the current applied to the lens. The trick of using a tunable and a convergent lens instead of simply the optotune lens is to keep the waist of the beam constant, in fact a non constant beam would change trapping frequency and trap depth resulting in losing atom during the transportation \cite{opticaltransportation}
+
+
 \subsection{Electronic PID}
 
 \section{Conclusion}
@@ -90,8 +92,9 @@ The setup is depicted in figure
 \bibitem{lens_datasheet}
  \textsc{Optotune}, \textit{EL-16-40-TC}, \url{https://www.optotune.com/images/products/Optotune%20EL-16-40-TC.pdf}
 %
-% \bibitem{demtroeder}
-% \textsc{W. Demtröder, H.-J. Foth}, \textit{Molekülspektren in kalten Düsenstrahlen}, \url{https://onlinelibrary.wiley.com/doi/pdf/10.1002/phbl.19870430104}
+ \bibitem{opticaltransportation}
+ \textsc{J. Léonard, M Lee, A. Morales, T. Karg, T Esslinger, T. Donner}, \textit{Optical transport and manipulation of an ultracold atomic cloud using focus-tunable lenses}, New Journal of Physics, volume 16 number 9, 2014
+
 %
 % \bibitem{bergmann}
 % \textsc{Bergmann-Schäfer}, \textit{Gase, Nanosysteme, Flüssigkeiten}, \textit{Band 5} (de Gruyter, 2005)
