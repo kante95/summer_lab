@@ -9,7 +9,7 @@
 \usepackage{subcaption}			% captions for subfigures
 \usepackage{booktabs}           % Schönere Tabellen
 \usepackage{colortbl}           % Farbige Tabellen
-
+\usepackage{gensymb}
 %\usepackage{tcolorbox}			% schöne bunte Boxen
 \usepackage{mathtools}			% \mathclap für ordentliche \underbrace-			environments
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}			% Pagelayout mit \newgeometry, \restoregeometry
@@ -68,26 +68,72 @@ In this project a setup for optical transportation of ultracold atoms has been r
 \end{titlepage}
 
 \section{Introduction}
-Transportation of atoms has became an important technique for manipulating and studying quantum gases and ultracold atoms. Moving the atoms allows to prepare the atomic cloud in a chamber and studying such clound in another region equipped with the appropriate instruments. Several approaches have been developed, such as magnetic transport or mechanically transporting the setup. In this experiment optical transportation is used, the idea is simple: atoms are loaded from the trap in a optical lattice which is then moved with a tunable lens. The crucial part of the experiment is to control the focus reliably, thermic drifts can move the focus resulting in losing control on the trapped atoms. Therefore, focus locking is needed. In this experiment a feedback loop is exploited to correct such drifts, the error signal is generated with a quadrant photodiode (QPD), it is then compared with a reference used to set the focus position and then fedback into the tunable lens.
+Transportation of atoms has became an important technique for manipulating and studying quantum gases and ultracold atoms. Moving the atoms allows to prepare the atomic cloud in a chamber and studying such clound in another region equipped with the appropriate instruments. Several approaches have been developed, such as magnetic transport or mechanically transporting the setup. In this experiment optical transportation is used, the idea is simple: atoms are loaded from the trap in a optical lattice which is then moved with a tunable lens. The crucial part of the experiment is to control the focus reliably, thermic drifts can move the focus resulting in losing control on the trapped atoms. Therefore, focus locking is needed. In this experiment a feedback loop is exploited to correct such drifts, the error signal is generated with a quadrant photodiode (QPD), it is then compared with a reference used to set the focus position and then fed back into the tunable lens.
 
 \section{Theoretical background}
 \subsection{Focus tunable lens}
 \subsection{Cylindrical lens}
 \section{Experiment setup}
+\begin{figure}[htp!]
+    \centering
+    \tikzstyle{block} = [draw, fill=blue!20, rectangle,
+    minimum height=3em, minimum width=6em]
+    \tikzstyle{sum} = [draw, fill=blue!20, circle, node distance=1cm]
+    \tikzstyle{input} = [coordinate]
+    \tikzstyle{output} = [coordinate]
+    \tikzstyle{pinstyle} = [pin edge={to-,thin,black}]
 
+\begin{tikzpicture}[auto, node distance=2cm,>=latex']
+    \node [input, name=input] {};
+    \node [sum, right of=input] (sum) {};
+    \node [block, right of=sum,
+            node distance=3cm] (system) {Optical setup};
+    \node [sum, right of=system, node distance=3cm, pin={[pinstyle]above:$R$}] (output) {};
+    \node [block, below of=system] (controller) {PID Controller};
 
-
-The setup prepared can be divided in two parts, the optical setup and the electronics part used to control the optics. The main idea of the experiment is to control and lock the focus of a 1064nm laser. This is done with an optotune EL-16-40-TC focus tunable lens \cite{lens_datasheet}. To lock the focus, a part of the beam has been send through a cylindrical lens, and then measured with a quadrant photodiode. The cylindrical lens deforms the spherical symmetry of the beam such that when projected on the photodiode, the light will not hit all the four quadrants uniformly. The signal generated from the quadrants can be used as a measure of relative focus, therefore we can feedback this signal to the lens and get focus locking.
+  %  \draw [->] (sum) -- (system);
+    \draw [->] (system) --  node {$X$}(output);
+    \draw [->] (output) |- node[pos=0.01] {$-$} node {$R - X$} (controller);
+    \draw [-] (controller) -|
+        node [near end] {$Y$} (sum)-- (system);
+\end{tikzpicture}
+\caption{Sketch of the control loop. The output of the system $X$ is compared to the reference $R$. The difference is fed into the controller, and the output of the controller $Y$ is fed back into the system. }
+\label{fig:control_loop}
+\end{figure}
+The setup prepared can be divided in two parts, the optical setup and the electronics part used to control the optics. The main idea of the experiment is to control and lock the focus of a 1064nm laser. This is done with an optotune EL-16-40-TC focus tunable lens \cite{lens_datasheet}. To lock the focus, a part of the beam has been send through a cylindrical lens, and then measured with a quadrant photodiode. The cylindrical lens deforms the spherical symmetry of the beam such that when projected on the photodiode, the light will not hit all the four quadrants uniformly. The signal generated from the quadrants can be used as a measure of relative focus, therefore we can feedback this signal to the lens and get focus locking. A sketch of the loop can be found in figure \ref{fig:control_loop}. $X$ is the value determined from the QPD as
+\[X = \frac{V_A + V_D - (V_B+V_C)}{V_A+V_B+V_C+V_D}.\]
+$V_A,V_B,V_C,V_D$ refer to the voltage output of the four quadrants as showed in figure \ref{img:opticsetup}, so $V_A$ and $V_D$ are opposite quadrant, and the same for $V_B$ and $V_C$. The idea of this formula is that when the ellipse is centered, a different orientation and different axis ratio will produce a different value for $X$. This value can be both negative or positive depending on the ellipse's orientation, in fact if the ellipse is tilted such that it mainly hits the quadrant $A$ and $D$, the sum $V_A+ V_D$ is greater then $V_B+V_C$ and $X$ will be positive, viceversa for the ellipse rotated of $90^\circ$. These situations are showed in figure \ref{fig:ellipses}. $X$ is also normalized such that it does not depend on the laser power. The value $R$ can be set from the computer of from an internal reference in the circuit, it is used to move the focus. Since the lens is current drive, the output of the PID $Y$ must be converted from voltage to current before feeding back to the lens. In the next two sections the details of the optical setup and the electronics are presented.
+\begin{figure}[H]
+  \centering{}
+  \begin{subfigure}[t]{0.3 \textwidth}
+    \centering
+    \includegraphics[width = \textwidth]{ellipse1}
+    \caption{The ellipse is hitting manly $B$ and $C$, this will generate a negative signal}
+  \end{subfigure}
+  ~
+  \begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width = \textwidth]{ellipse3}
+    \caption{The ellipse is symmetric, thus the generated signal is 0}
+  \end{subfigure}
+  ~
+  \begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width = \textwidth]{ellipse2}
+    \caption{The ellipse is hitting manly $A$ and $D$, this will generate a positive signal}
+  \end{subfigure}
+  \caption{Extreme cases of ellipse projected on the quadrant photodiode.}
+  \label{fig:ellipses}
+\end{figure}
 \subsection{Optical setup}
 \begin{figure}
 \centering
 \includegraphics[width = .5\textwidth]{opticsetup}
 \caption{Optical setup, after the fiber a 1064nm laser light is collimated and sent trough a tunable lens. Two cylindrical lens and a quadrant photodiode are used to generate an error signal for the focus which is feedback to the lens with some electronics. The focus of the laser could be changed from point A to point B, roughly 40 cm.} \label{img:opticsetup}
 \end{figure}
-The setup is depicted in figure \ref{img:opticsetup}. We used a 1064nm laser, the light is split with a beam splitter, one beam is used in another experiment, while the beam showed in the setup is coupled with a fiber in order to filter the modes and have at the end a pure Gaussian beam. After the fiber the beam is expanded with two lenses to roughly 10 mm diameter. Subsequently, the beam pass through a tunable lens controlled by the electronic part. The lens can change focus from  -500 to +333 mm, but in this experiment we kept the focus negative. A beam splitter is used to create a beam for measuring the focus shift, while the transmitted beam is focused with a 400mm lens between point A and B depending on the current applied to the lens. The trick of using a tunable and a convergent lens instead of simply the optotune lens is to keep the waist of the beam constant, in fact a non constant beam would change trapping frequency and trap depth resulting in losing atom during the transportation \cite{opticaltransportation}.  Before the quadrant photodiode, the beam is reshaped by two cylindrical lenses. One cylindrical lens would have been enough, but with two of them a better control over the shape can be achieved. This allows for a tuning of the QPD output, changing the shape will change the voltage output and therefore by moving the lenses and the QPD, the working range of the QPD can be changed to better suit the specification of the electronic part.
-
-
+The setup is depicted in figure \ref{img:opticsetup}. We used a 1064nm laser, the light is split with a beam splitter, one beam is used in another experiment, while the beam showed in the setup is coupled with a fiber in order to filter the modes and have at the end a pure Gaussian beam. After the fiber the beam is expanded with two lenses to roughly 10 mm diameter. Subsequently, the beam pass through a tunable lens controlled by the electronic part. The lens can change focus from  -500 to +333 mm, but in this experiment we kept the focus negative. A beam splitter is used to create a beam for measuring the focus shift, while the transmitted beam is focused with a 400mm lens between point A and B depending on the current applied to the lens. The trick of using a tunable and a convergent lens instead of simply the optotune lens is to keep the waist of the beam constant, in fact a non constant beam would change trapping frequency and trap depth resulting in losing atom during the transportation \cite{opticaltransportation}.  Before the quadrant photodiode, the beam is reshaped by two cylindrical lenses of 100mm and 300mm focus length. One cylindrical lens would have been enough, but with two of them a better control over the shape can be achieved. This allows for a tuning of the QPD output, changing the shape will change the voltage output and therefore by moving the cylindrical lenses and the QPD, the working range of the QPD can be changed to better suit the specification of the electronic part.
 \subsection{Electronic PID}
+The electronics take care of driving the lens and calculate the feedback signal to lock the focus.
 
 \section{Conclusion}
 
